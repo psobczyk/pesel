@@ -2,7 +2,7 @@
 #'
 #' @docType package
 #' @name varclust
-#' @details Version: 0.1.0
+#' @details Version: 0.2.0
 #' @author Piotr Sobczyk,
 #'         Julie Josse,
 #'         Malgorzata Bogdan

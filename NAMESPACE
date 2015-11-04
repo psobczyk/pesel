@@ -3,3 +3,4 @@
 S3method(plot,mlcc.fit)
 S3method(print,mlcc.fit)
 S3method(print,mlcc.reps.fit)
+export(pesel)
