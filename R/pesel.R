@@ -26,7 +26,7 @@
 #' data(UrineSpectra)
 #' pesel(UrineSpectra[[1]], method = "heterogenous", verbose=TRUE)
 #' }
-pesel <- function(X, npc.min = 1, npc.max = 10, scale = TRUE,
+pesel <- function(X, npc.min = 1, npc.max = 10, scale = FALSE,
                       method=c("heterogenous", "homogenous"), verbose = FALSE){
   # preprocessing on X
   # number of components must be smaller than dimensions of X
@@ -53,11 +53,17 @@ pesel <- function(X, npc.min = 1, npc.max = 10, scale = TRUE,
   if(scale)
     X <- scale(X)
 
-  vals <- switch(method,
-                 "heterogenous" = ifelse(p>n, sapply(npc.min:npc.max, function(j) pca.new.BIC(X, j)),
-                                         sapply(npc.min:npc.max, function(j) pca.BIC(X, j))),
-                 "homogenous" = ifelse(p>n, sapply(npc.min:npc.max, function(j) rajan.BIC(t(X), j)),
-                                       sapply(npc.min:npc.max, function(j) rajan.BIC(X, j))))
+  vals <- numeric(10)
+  vals <- if(p>n) {
+    switch(method,
+                 "heterogenous" = sapply(npc.min:npc.max, function(j) pca.new.BIC(X, j)),
+                 "homogenous" = sapply(npc.min:npc.max, function(j) rajan.BIC(X, j)))
+    } else {
+      switch(method,
+             "heterogenous" = sapply(npc.min:npc.max, function(j) pca.BIC(X, j)),
+             "homogenous" = sapply(npc.min:npc.max, function(j) rajan.BIC(t(X), j)))
+    }
+  vals
   if(verbose){
     caption <- paste0("Criterion:\n", method)
     plot(npc.min:npc.max, vals, xlab = "Number of components", ylab = "Criterion value",

@@ -4,7 +4,7 @@
 \alias{pesel}
 \title{Automatic estimation of number of principal components in PCA}
 \usage{
-pesel(X, npc.min = 1, npc.max = 10, scale = TRUE,
+pesel(X, npc.min = 1, npc.max = 10, scale = FALSE,
   method = c("heterogenous", "homogenous"), verbose = FALSE)
 }
 \arguments{
