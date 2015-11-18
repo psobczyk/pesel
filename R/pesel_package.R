@@ -1,8 +1,8 @@
-#' PESEL
+#' pesel
 #'
 #' @docType package
-#' @name varclust
-#' @details Version: 0.2.0
+#' @name pesel
+#' @details Version: 0.3.0
 #' @author Piotr Sobczyk,
 #'         Julie Josse,
 #'         Malgorzata Bogdan
