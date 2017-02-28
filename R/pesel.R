@@ -18,6 +18,8 @@
 #' dimensions of X, min(ncol(X), nrow(X))-1 is used, for all the possible
 #' number of PCs between npc.min and npc.max criterion is computed
 #' @param method name of criterion to be used
+#' @param asymptotics a character, asymptotics ('n' or 'p') to be used. Default is NULL
+#' for which asymptotics is selected based on dimensions of X
 #' @param scale a boolean, if TRUE (default value) then data is scaled before
 #' applying criterion
 #' @export
@@ -29,7 +31,7 @@
 #' pesel(UrineSpectra[[1]], method = "heterogenous")
 #' }
 pesel <- function(X, npc.min = 1, npc.max = 10, scale = FALSE,
-                      method = c("heterogenous", "homogenous")){
+                      method = c("heterogenous", "homogenous"), asymptotics = NULL){
   # preprocessing on X
   # number of components must be smaller than dimensions of X
   n = nrow(X)
@@ -56,15 +58,28 @@ pesel <- function(X, npc.min = 1, npc.max = 10, scale = FALSE,
     X = scale(X)
 
   vals = numeric(10)
-  vals = if(p>n) {
-    switch(method,
-                 "heterogenous" = pesel_heterogeneous_big_p(X, npc.min, npc.max),
-                 "homogenous" = pesel_homogeneous_big_p(X, npc.min, npc.max))
+  if(is.null(asymptotics)){
+    vals = if(p > n) {
+      switch(method,
+             "heterogenous" = pesel_heterogeneous_big_p(X, npc.min, npc.max),
+             "homogenous" = pesel_homogeneous_big_p(X, npc.min, npc.max))
     } else {
       switch(method,
              "heterogenous" = pesel_heterogeneous_big_n(X, npc.min, npc.max),
              "homogenous" = pesel_homogeneous_big_p(t(X), npc.min, npc.max))
     }
+  } else if(asymptotics == "p") {
+    vals = switch(method,
+                  "heterogenous" = pesel_heterogeneous_big_p(X, npc.min, npc.max),
+                  "homogenous" = pesel_homogeneous_big_p(X, npc.min, npc.max))
+  } else if(asymptotics == "n") {
+    vals = switch(method,
+                  "heterogenous" = pesel_heterogeneous_big_n(X, npc.min, npc.max),
+                  "homogenous" = pesel_homogeneous_big_p(t(X), npc.min, npc.max))
+  } else {
+    stop("asymptotics must be either NULL, 'n' or 'p'")
+  }
+
 
   result = NULL
   result$nPCs = npc.min-1+which.max(vals)
@@ -79,15 +94,25 @@ pesel <- function(X, npc.min = 1, npc.max = 10, scale = FALSE,
 #' Plot pesel.result class object
 #'
 #' @param x pesel.result class object
+#' @param useProbabilities a boolean, if TRUE (default value) then posterior probablities are plotted
+#' otherwise values of PeSeL criterion are plotted
 #' @param ... Further arguments to be passed to or from other methods. They are ignored in this function.
 #' @export
 #' @keywords internal
-plot.pesel.result <- function(x,...){
-  vals = x$vals - max(x$vals) + 20
-  probs = exp(vals)/sum(exp(vals))
+plot.pesel.result <- function(x, useProbabilities = TRUE, ...){
+  if(useProbabilities){
+    vals = x$vals - max(x$vals) + 20
+    probs = exp(vals)/sum(exp(vals))
+    ylabel = "Posterior probability"
+    title = "Posterior probabilities for PeSeL"
+  } else{
+    probs = x$vals
+    ylabel = "PeSeL"
+    title = "Number of components selected by PeSeL"
+  }
   plot(x$npc.min:x$npc.max, probs, xlab = "Number of components",
-       ylab = "Posterior probability", main = "PESEL", type = "b")
-  points(x$npc.min-1+which.max(vals), max(probs), col = "red")
+       ylab = ylabel, main = title, type = "b")
+  points(x$npc.min-1+which.max(probs), max(probs), col = "red")
 }
 
 #' Print pesel.result class object

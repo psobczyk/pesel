@@ -8,7 +8,7 @@
 with PEnalized SEmi-integrated Likelihood (PESEL)}
 \usage{
 pesel(X, npc.min = 1, npc.max = 10, scale = FALSE,
-  method = c("heterogenous", "homogenous"))
+  method = c("heterogenous", "homogenous"), asymptotics = NULL)
 }
 \arguments{
 \item{X}{a data frame or a matrix contatining only continuous variables}
@@ -24,6 +24,9 @@ number of PCs between npc.min and npc.max criterion is computed}
 applying criterion}
 
 \item{method}{name of criterion to be used}
+
+\item{asymptotics}{a character, asymptotics ('n' or 'p') to be used. Default is NULL
+for which asymptotics is selected based on dimensions of X}
 }
 \value{
 number of components
