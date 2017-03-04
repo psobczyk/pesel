@@ -17,7 +17,7 @@
 #' @param npc.max maximal number of principal components, if greater than
 #' dimensions of X, min(ncol(X), nrow(X))-1 is used, for all the possible
 #' number of PCs between npc.min and npc.max criterion is computed
-#' @param prior a numeric positive vector of length npc.max-ncp.min+1. Prior distribution on 
+#' @param prior a numeric positive vector of length npc.max-ncp.min+1. Prior distribution on
 #' number of principal components. Defaults to uniform distibution
 #' @param scale a boolean, if TRUE (default value) then data is scaled before
 #' applying criterion
@@ -39,7 +39,7 @@ pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
   n = nrow(X)
   p = ncol(X)
   npc.max = min(npc.max, min(n,p)-1)
-  npc.min = max(npc.min, 1)
+  npc.min = max(npc.min, 0)
 
   if(is.null(prior)){
     prior = rep(1/(npc.max - npc.min + 1), npc.max - npc.min + 1)
@@ -50,7 +50,7 @@ pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
   } else if(any(prior < 0)){
     stop("Prior needs to be a positive vector")
   }
-  
+
   method = match.arg(method)
 
   if(class(X) == "data.frame"){
@@ -69,7 +69,7 @@ pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
   if(scale)
     X = scale(X)
 
-  vals = numeric(10)
+  vals = numeric(length(prior))
   if(is.null(asymptotics)){
     vals = if(p > n) {
       switch(method,
@@ -138,6 +138,7 @@ pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
 print.pesel.result <- function(x,...){
   cat("$nPCs: ", x$nPCs, "\n")
   cat("$vals: value of PeSeL criterion\n")
+  cat("$prior: prior probabilities\n")
   cat("$npc.min: ", x$npc.min, "\n")
   cat("$npc.max: ", x$npc.max, "\n")
 }
