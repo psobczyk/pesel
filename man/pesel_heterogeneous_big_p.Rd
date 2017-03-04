@@ -21,4 +21,3 @@ numeric vector, PESEL criterion for each k in range [minK, maxK]
 Derived under assumption that number of variables tends to infinity
 while number of observations is limited.
 }
-

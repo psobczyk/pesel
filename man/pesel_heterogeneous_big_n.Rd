@@ -24,4 +24,3 @@ Minka, \emph{Automatic choice of dimensionality for PCA}
 \references{
 Automatic choice of dimensionality for PCA, Thomas P. Minka
 }
-

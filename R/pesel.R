@@ -17,11 +17,13 @@
 #' @param npc.max maximal number of principal components, if greater than
 #' dimensions of X, min(ncol(X), nrow(X))-1 is used, for all the possible
 #' number of PCs between npc.min and npc.max criterion is computed
+#' @param prior a numeric positive vector of length npc.max-ncp.min+1. Prior distribution on 
+#' number of principal components. Defaults to uniform distibution
+#' @param scale a boolean, if TRUE (default value) then data is scaled before
+#' applying criterion
 #' @param method name of criterion to be used
 #' @param asymptotics a character, asymptotics ('n' or 'p') to be used. Default is NULL
 #' for which asymptotics is selected based on dimensions of X
-#' @param scale a boolean, if TRUE (default value) then data is scaled before
-#' applying criterion
 #' @export
 #' @return number of components
 #' @examples
@@ -30,7 +32,7 @@
 #' data(UrineSpectra)
 #' pesel(UrineSpectra[[1]], method = "heterogenous")
 #' }
-pesel <- function(X, npc.min = 1, npc.max = 10, scale = FALSE,
+pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
                       method = c("heterogenous", "homogenous"), asymptotics = NULL){
   # preprocessing on X
   # number of components must be smaller than dimensions of X
@@ -39,6 +41,16 @@ pesel <- function(X, npc.min = 1, npc.max = 10, scale = FALSE,
   npc.max = min(npc.max, min(n,p)-1)
   npc.min = max(npc.min, 1)
 
+  if(is.null(prior)){
+    prior = rep(1/(npc.max - npc.min + 1), npc.max - npc.min + 1)
+  } else if(length(prior) != npc.max - npc.min + 1){
+    stop("Prior needs to be a vector of length npc.max - npc.min + 1")
+  } else if(!is.numeric(prior)){
+    stop("Prior needs to be a numeric vector")
+  } else if(any(prior < 0)){
+    stop("Prior needs to be a positive vector")
+  }
+  
   method = match.arg(method)
 
   if(class(X) == "data.frame"){
@@ -82,8 +94,9 @@ pesel <- function(X, npc.min = 1, npc.max = 10, scale = FALSE,
 
 
   result = NULL
-  result$nPCs = npc.min-1+which.max(vals)
+  result$nPCs = npc.min - 1 + which.max(vals + log(prior))
   result$vals = vals
+  result$prior = prior
   result$npc.min = npc.min
   result$npc.max = npc.max
   class(result) = "pesel.result"
@@ -94,19 +107,20 @@ pesel <- function(X, npc.min = 1, npc.max = 10, scale = FALSE,
 #' Plot pesel.result class object
 #'
 #' @param x pesel.result class object
-#' @param useProbabilities a boolean, if TRUE (default value) then posterior probablities are plotted
+#' @param posterior a boolean, if TRUE (default value) then posterior probablities are plotted
 #' otherwise values of PeSeL criterion are plotted
 #' @param ... Further arguments to be passed to or from other methods. They are ignored in this function.
 #' @export
 #' @keywords internal
-plot.pesel.result <- function(x, useProbabilities = TRUE, ...){
-  if(useProbabilities){
-    vals = x$vals - max(x$vals) + 20
+  plot.pesel.result <- function(x, posterior = TRUE, ...){
+  if(posterior){
+    vals = x$vals + log(x$prior)
+    vals = vals - max(vals) + 20
     probs = exp(vals)/sum(exp(vals))
     ylabel = "Posterior probability"
     title = "Posterior probabilities for PeSeL"
   } else{
-    probs = x$vals
+    probs = x$vals + log(x$prior)
     ylabel = "PeSeL"
     title = "Number of components selected by PeSeL"
   }

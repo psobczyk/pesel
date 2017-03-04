@@ -15,4 +15,3 @@
 Print pesel.result class object
 }
 \keyword{internal}
-
