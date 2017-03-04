@@ -49,7 +49,7 @@ with PEnalized SEmi-integrated Likelihood (PESEL).
 \details{
 Please note that no categorical variables and missing values are allowed.
 
-Version: 0.6.0
+Version: 0.7.0
 }
 \examples{
 \dontrun{

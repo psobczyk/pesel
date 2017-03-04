@@ -92,11 +92,15 @@ pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
     stop("asymptotics must be either NULL, 'n' or 'p'")
   }
 
+  posterior = vals + log(prior)
+  posterior = posterior - max(posterior) + 20
+  posterior = exp(posterior)/sum(exp(posterior))
 
   result = NULL
   result$nPCs = npc.min - 1 + which.max(vals + log(prior))
   result$vals = vals
   result$prior = prior
+  result$posterior = posterior
   result$npc.min = npc.min
   result$npc.max = npc.max
   class(result) = "pesel.result"
@@ -114,9 +118,7 @@ pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
 #' @keywords internal
   plot.pesel.result <- function(x, posterior = TRUE, ...){
   if(posterior){
-    vals = x$vals + log(x$prior)
-    vals = vals - max(vals) + 20
-    probs = exp(vals)/sum(exp(vals))
+    probs = x$posterior
     ylabel = "Posterior probability"
     title = "Posterior probabilities for PeSeL"
   } else{
@@ -139,6 +141,7 @@ print.pesel.result <- function(x,...){
   cat("$nPCs: ", x$nPCs, "\n")
   cat("$vals: value of PeSeL criterion\n")
   cat("$prior: prior probabilities\n")
+  cat("$posterior: posterior probabilities\n")
   cat("$npc.min: ", x$npc.min, "\n")
   cat("$npc.max: ", x$npc.max, "\n")
 }

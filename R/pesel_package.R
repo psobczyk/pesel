@@ -3,7 +3,7 @@
 #' @description Automatic estimation of number of principal components in PCA
 #' with PEnalized SEmi-integrated Likelihood (PESEL).
 #'
-#' @details Version: 0.6.0
+#' @details Version: 0.7.0
 #' @docType package
 #' @name pesel
 #' @importFrom stats cov
