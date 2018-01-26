@@ -3,6 +3,7 @@
 \docType{package}
 \name{pesel}
 \alias{pesel}
+\alias{pesel}
 \alias{pesel-package}
 \title{Automatic estimation of number of principal components in PCA
 with PEnalized SEmi-integrated Likelihood (PESEL)}
@@ -44,7 +45,7 @@ pesel
 \details{
 Please note that no categorical variables and missing values are allowed.
 
-Version: 0.4.0
+Version: 0.4.1
 }
 \examples{
 \dontrun{
@@ -66,4 +67,3 @@ Piotr Sobczyk,
 
 Maintainer: Piotr Sobczyk \email{Piotr.Sobczyk@pwr.edu.pl}
 }
-

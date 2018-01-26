@@ -2,7 +2,7 @@
 #'
 #' @docType package
 #' @name pesel
-#' @details Version: 0.4.0
+#' @details Version: 0.4.1
 #' @author Piotr Sobczyk,
 #'         Julie Josse,
 #'         Malgorzata Bogdan

@@ -13,6 +13,9 @@ pesel_homogeneous_big_p <- function(X, minK, maxK){
   d <- dim(X)[1]
   N <- dim(X)[2]
   lambda <- eigen(cov(t(X)), only.values = TRUE)$values
+  if(any(lambda < 0)){ #numerical error, eigen values of covariance matrix should be positive
+    lambda[lambda < 0] = 1e-16 #we change it to something close to zero
+  }
 
   pesel <- NULL
   for(k in minK:maxK){
@@ -47,6 +50,9 @@ pesel_heterogeneous_big_n <- function(X, minK, maxK){
   d <- dim(X)[1]
   N <- dim(X)[2]
   lambda <- eigen(cov(X), only.values = TRUE)$values
+  if(any(lambda < 0)){ #numerical error, eigen values of covariance matrix should be positive
+    lambda[lambda < 0] = 1e-16 #we change it to something close to zero
+  }
 
   pesel <- NULL
   for(k in minK:maxK){
@@ -73,6 +79,9 @@ pesel_heterogeneous_big_p <- function(X, minK, maxK){
   d <- dim(X)[1]
   N <- dim(X)[2]
   lambda <- eigen(cov(t(X)), only.values = TRUE)$values
+  if(any(lambda < 0)){ #numerical error, eigen values of covariance matrix should be positive
+    lambda[lambda < 0] = 1e-16 #we change it to something close to zero
+  }
 
   pesel <- NULL
   for(k in minK:maxK){
