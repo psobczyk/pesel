@@ -1,12 +1,19 @@
 Package: pesel
 Type: Package
 Title: Automatic estimation of number of principal components in PCA
-Version: 0.4.1
+Version: 0.7.1
 Date: 2018-01-26
 Author: Piotr Sobczyk, Julie Josse, Malgorzata Bogdan
 Maintainer: Piotr Sobczyk <Piotr.Sobczyk@pwr.edu.pl>
 Description: Automatic estimation of number of principal components in PCA
     with PEnalized SEmi-integrated Likelihood (PESEL).
 License: GPL-3
+URL: https://github.com/psobczyk/pesel
+BugReports: https://github.com/psobczyk/pesel/issues
+Depends:
+    R (>= 3.1.3),
+Imports:
+    stats,
+    graphics
 LazyData: TRUE
 RoxygenNote: 6.0.1

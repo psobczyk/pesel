@@ -4,12 +4,12 @@
 \alias{plot.pesel.result}
 \title{Plot pesel.result class object}
 \usage{
-\method{plot}{pesel.result}(x, useProbabilities = TRUE, ...)
+\method{plot}{pesel.result}(x, posterior = TRUE, ...)
 }
 \arguments{
 \item{x}{pesel.result class object}
 
-\item{useProbabilities}{a boolean, if TRUE (default value) then posterior probablities are plotted
+\item{posterior}{a boolean, if TRUE (default value) then posterior probablities are plotted
 otherwise values of PeSeL criterion are plotted}
 
 \item{...}{Further arguments to be passed to or from other methods. They are ignored in this function.}
@@ -18,4 +18,3 @@ otherwise values of PeSeL criterion are plotted}
 Plot pesel.result class object
 }
 \keyword{internal}
-

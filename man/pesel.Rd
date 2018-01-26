@@ -8,7 +8,7 @@
 \title{Automatic estimation of number of principal components in PCA
 with PEnalized SEmi-integrated Likelihood (PESEL)}
 \usage{
-pesel(X, npc.min = 1, npc.max = 10, scale = FALSE,
+pesel(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
   method = c("heterogenous", "homogenous"), asymptotics = NULL)
 }
 \arguments{
@@ -20,6 +20,9 @@ number of PCs between npc.min and npc.max criterion is computed}
 \item{npc.max}{maximal number of principal components, if greater than
 dimensions of X, min(ncol(X), nrow(X))-1 is used, for all the possible
 number of PCs between npc.min and npc.max criterion is computed}
+
+\item{prior}{a numeric positive vector of length npc.max-ncp.min+1. Prior distribution on
+number of principal components. Defaults to uniform distibution}
 
 \item{scale}{a boolean, if TRUE (default value) then data is scaled before
 applying criterion}
@@ -40,12 +43,13 @@ according to penalized likelihood criterion. Function adjusts the model used
 to the case when number of variables is larger than the number of
 observations.
 
-pesel
+Automatic estimation of number of principal components in PCA
+with PEnalized SEmi-integrated Likelihood (PESEL).
 }
 \details{
 Please note that no categorical variables and missing values are allowed.
 
-Version: 0.4.1
+Version: 0.7.1
 }
 \examples{
 \dontrun{
@@ -55,15 +59,20 @@ pesel(UrineSpectra[[1]], method = "heterogenous")
 }
 \dontrun{
 library(varclust)
-set.seeed(1)
+set.seed(1)
 sim.data <- data.simulation(n = 100, SNR = 1, K=1, numb.vars = 200, max.dim = 5)
-pesel(sim.data$X, 1, 10)
+pesel(sim.data$X, 1, 10, prior = c(1, rep(0, 9)))
 }
+}
+\references{
+\emph{Bayesian dimensionality reduction with PCA using penalized semi-integrated likelihood},
+Piotr Sobczyk, Malgorzata Bogdan, Julie Josse
 }
 \author{
-Piotr Sobczyk,
-        Julie Josse,
-        Malgorzata Bogdan
+{ Piotr Sobczyk,
+         Julie Josse,
+         Malgorzata Bogdan
 
 Maintainer: Piotr Sobczyk \email{Piotr.Sobczyk@pwr.edu.pl}
+}
 }

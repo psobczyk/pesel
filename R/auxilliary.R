@@ -27,7 +27,7 @@ pesel_homogeneous_big_p <- function(X, minK, maxK){
     t2 <- -N*(d-k)/2*log(v)
     t3 <- -N*d/2
     pen <- -(m+d+1+1)/2*log(N)
-    pesel[k] <- t0+t1+t2+t3+pen
+    pesel <- c(pesel, t0 + t1 + t2 + t3 + pen)
   }
   pesel
 }
@@ -59,7 +59,7 @@ pesel_heterogeneous_big_n <- function(X, minK, maxK){
     m <- N*k - k*(k+1)/2
     v <- sum(lambda[(k+1):N])/(N-k)
 
-    pesel[k] <- -d/2*sum(log(lambda[1:k])) -d*(N-k)/2*log(v) -(m+k)/2*log(d)
+    pesel <- c(pesel, -d/2*sum(log(lambda[1:k])) -d*(N-k)/2*log(v) -(m+k)/2*log(d))
   }
   pesel
 }
@@ -93,7 +93,7 @@ pesel_heterogeneous_big_p <- function(X, minK, maxK){
     t2 <- -N*(d-k)/2*log(v)
     t3 <- -N*d/2
     pen <- -(m+d+k+1)/2*log(N)
-    pesel[k] <- t0+t1+t2+t3+pen
+    pesel <- c(pesel, t0+t1+t2+t3+pen)
   }
   pesel
 }
