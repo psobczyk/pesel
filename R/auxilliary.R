@@ -9,7 +9,7 @@
 #' @param maxK maximal number of principal components fitted
 #' @export
 #' @return numeric vector, PESEL criterion for each k in range [minK, maxK]
-pesel_homogeneous_big_p <- function(X, minK, maxK){
+pesel_homogeneous <- function(X, minK, maxK){
   d <- dim(X)[1]
   N <- dim(X)[2]
   lambda <- eigen(cov(t(X)), only.values = TRUE)$values
@@ -32,38 +32,6 @@ pesel_homogeneous_big_p <- function(X, minK, maxK){
   pesel
 }
 
-
-#' PEnalized SEmi-integrated Likelihood for heterogeneous singular values and
-#' large number of observations
-#'
-#' Equivalent to BIC for PCA, as given by
-#' Minka, \emph{Automatic choice of dimensionality for PCA}
-#'
-#'
-#' @param X a matrix containing only continuous variables
-#' @param minK minimal number of principal components fitted
-#' @param maxK maximal number of principal components fitted
-#' @export
-#' @return numeric vector, PESEL criterion for each k in range [minK, maxK]
-#' @references Automatic choice of dimensionality for PCA, Thomas P. Minka
-pesel_heterogeneous_big_n <- function(X, minK, maxK){
-  d <- dim(X)[1]
-  N <- dim(X)[2]
-  lambda <- eigen(cov(X), only.values = TRUE)$values
-  if(any(lambda < 0)){ #numerical error, eigen values of covariance matrix should be positive
-    lambda[lambda < 0] = 1e-16 #we change it to something close to zero
-  }
-
-  pesel <- NULL
-  for(k in minK:maxK){
-    m <- N*k - k*(k+1)/2
-    v <- sum(lambda[(k+1):N])/(N-k)
-
-    pesel <- c(pesel, -d/2*sum(log(lambda[1:k])) -d*(N-k)/2*log(v) -(m+k)/2*log(d))
-  }
-  pesel
-}
-
 #' PEnalized SEmi-integrated Likelihood for heterogeneous singular values and
 #' large number of variables
 #'
@@ -75,7 +43,7 @@ pesel_heterogeneous_big_n <- function(X, minK, maxK){
 #' @param maxK maximal number of principal components fitted
 #' @export
 #' @return numeric vector, PESEL criterion for each k in range [minK, maxK]
-pesel_heterogeneous_big_p <- function(X, minK, maxK){
+pesel_heterogeneous <- function(X, minK, maxK){
   d <- dim(X)[1]
   N <- dim(X)[2]
   lambda <- eigen(cov(t(X)), only.values = TRUE)$values

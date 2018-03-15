@@ -73,21 +73,21 @@ pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
   if(is.null(asymptotics)){
     vals = if(p > n) {
       switch(method,
-             "heterogenous" = pesel_heterogeneous_big_p(X, npc.min, npc.max),
-             "homogenous" = pesel_homogeneous_big_p(X, npc.min, npc.max))
+             "heterogenous" = pesel_heterogeneous(X, npc.min, npc.max),
+             "homogenous" = pesel_homogeneous(X, npc.min, npc.max))
     } else {
       switch(method,
-             "heterogenous" = pesel_heterogeneous_big_n(X, npc.min, npc.max),
-             "homogenous" = pesel_homogeneous_big_p(t(X), npc.min, npc.max))
+             "heterogenous" = pesel_heterogeneous(t(X), npc.min, npc.max),
+             "homogenous" = pesel_homogeneous(t(X), npc.min, npc.max))
     }
   } else if(asymptotics == "p") {
     vals = switch(method,
-                  "heterogenous" = pesel_heterogeneous_big_p(X, npc.min, npc.max),
-                  "homogenous" = pesel_homogeneous_big_p(X, npc.min, npc.max))
+                  "heterogenous" = pesel_heterogeneous(X, npc.min, npc.max),
+                  "homogenous" = pesel_homogeneous(X, npc.min, npc.max))
   } else if(asymptotics == "n") {
     vals = switch(method,
-                  "heterogenous" = pesel_heterogeneous_big_n(X, npc.min, npc.max),
-                  "homogenous" = pesel_homogeneous_big_p(t(X), npc.min, npc.max))
+                  "heterogenous" = pesel_heterogeneous(t(X), npc.min, npc.max),
+                  "homogenous" = pesel_homogeneous(t(X), npc.min, npc.max))
   } else {
     stop("asymptotics must be either NULL, 'n' or 'p'")
   }
