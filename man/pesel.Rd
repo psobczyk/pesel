@@ -65,14 +65,15 @@ pesel(sim.data$X, 1, 10, prior = c(1, rep(0, 9)))
 }
 }
 \references{
-\emph{Bayesian dimensionality reduction with PCA using penalized semi-integrated likelihood},
 Piotr Sobczyk, Malgorzata Bogdan, Julie Josse
+\emph{Bayesian dimensionality reduction with PCA using penalized semi-integrated likelihood},
+Journal of Computational and Graphical Statistics 2017
 }
 \author{
 { Piotr Sobczyk,
          Julie Josse,
          Malgorzata Bogdan
 
-Maintainer: Piotr Sobczyk \email{Piotr.Sobczyk@pwr.edu.pl}
+Maintainer: Piotr Sobczyk \email{pj.sobczyk@gmail.com}
 }
 }
