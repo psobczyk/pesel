@@ -12,10 +12,11 @@
 #'          Julie Josse,
 #'          Malgorzata Bogdan
 #'
-#' Maintainer: Piotr Sobczyk \email{Piotr.Sobczyk@@pwr.edu.pl}
+#' Maintainer: Piotr Sobczyk \email{pj.sobczyk@@gmail.pl}
 #' }
-#' @references \emph{Bayesian dimensionality reduction with PCA using penalized semi-integrated likelihood},
-#' Piotr Sobczyk, Malgorzata Bogdan, Julie Josse
+#' @references Piotr Sobczyk, Malgorzata Bogdan, Julie Josse
+#' \emph{Bayesian dimensionality reduction with PCA using penalized semi-integrated likelihood},
+#' Journal of Computational and Graphical Statistics 2017
 #'
 #' @examples
 #' \dontrun{
