@@ -3,7 +3,6 @@
 \docType{package}
 \name{pesel}
 \alias{pesel}
-\alias{pesel}
 \alias{pesel-package}
 \title{Automatic estimation of number of principal components in PCA
 with PEnalized SEmi-integrated Likelihood (PESEL)}
@@ -49,14 +48,46 @@ with PEnalized SEmi-integrated Likelihood (PESEL).
 \details{
 Please note that no categorical variables and missing values are allowed.
 
-Version: 0.7.1
+Version: 0.7.2
 }
 \examples{
+# EXAMPLE 1 - noise
+with(set.seed(23), pesel(matrix(rnorm(10000), ncol = 100), npc.min = 0))
+
+# EXAMPLE 2 - fixed effects PCA model
+sigma <- 0.5
+k <-  5
+n <- 100
+numb.vars <- 10
+# factors are drawn from normal distribution
+factors <- replicate(k, rnorm(n, 0, 1))
+# coefficients are drawn from uniform distribution
+coeff <- replicate(numb.vars, rnorm(k, 0, 1))
+SIGNAL <- scale(factors \%*\% coeff)
+X <- SIGNAL + replicate(numb.vars, sigma * rnorm(n))
+pesel(X)
+
 \dontrun{
 library(MetabolAnalyze)
 data(UrineSpectra)
 pesel(UrineSpectra[[1]], method = "heterogenous")
 }
+# EXAMPLE 1 - noise
+with(set.seed(23), pesel(matrix(rnorm(10000), ncol = 100), npc.min = 0))
+
+# EXAMPLE 2 - fixed effects PCA model
+sigma <- 0.5
+k <-  5
+n <- 100
+numb.vars <- 10
+# factors are drawn from normal distribution
+factors <- replicate(k, rnorm(n, 0, 1))
+# coefficients are drawn from uniform distribution
+coeff <- replicate(numb.vars, rnorm(k, 0, 1))
+SIGNAL <- scale(factors \%*\% coeff)
+X <- SIGNAL + replicate(numb.vars, sigma * rnorm(n))
+pesel(X)
+
 \dontrun{
 library(varclust)
 set.seed(1)
