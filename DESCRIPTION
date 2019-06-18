@@ -8,7 +8,7 @@ Maintainer: Piotr Sobczyk <pj.sobczyk@gmail.com>
 Description: Automatic estimation of number of principal components in PCA
     with PEnalized SEmi-integrated Likelihood (PESEL). See Piotr Sobczyk, Malgorzata Bogdan, Julie Josse
     'Bayesian dimensionality reduction with PCA using penalized semi-integrated likelihood' 
-    (2017) <doi:10.1080/10618600.2017.1340302>
+    (2017) <doi:10.1080/10618600.2017.1340302>.
 License: GPL-3
 Encoding: UTF-8
 URL: https://github.com/psobczyk/pesel

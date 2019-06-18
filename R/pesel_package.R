@@ -5,7 +5,7 @@
 #'
 #' @details Version: 0.7.2
 #' @docType package
-#' @name pesel
+#' @name pesel-package
 #' @importFrom stats cov
 #' @importFrom graphics plot points
 #' @author{ Piotr Sobczyk,
