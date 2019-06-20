@@ -43,11 +43,6 @@
 #' X <- SIGNAL + replicate(numb.vars, sigma * rnorm(n))
 #' pesel(X)
 #'
-#' \dontrun{
-#' library(MetabolAnalyze)
-#' data(UrineSpectra)
-#' pesel(UrineSpectra[[1]], method = "heterogenous")
-#' }
 pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
                       method = c("heterogenous", "homogenous"), asymptotics = NULL){
   # preprocessing on X

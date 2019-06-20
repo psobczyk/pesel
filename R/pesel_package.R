@@ -35,10 +35,4 @@
 #' X <- SIGNAL + replicate(numb.vars, sigma * rnorm(n))
 #' pesel(X)
 #'
-#' \dontrun{
-#' library(varclust)
-#' set.seed(1)
-#' sim.data <- data.simulation(n = 100, SNR = 1, K=1, numb.vars = 200, max.dim = 5)
-#' pesel(sim.data$X, 1, 10, prior = c(1, rep(0, 9)))
-#' }
 NULL

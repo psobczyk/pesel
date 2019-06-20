@@ -60,9 +60,4 @@ SIGNAL <- scale(factors \%*\% coeff)
 X <- SIGNAL + replicate(numb.vars, sigma * rnorm(n))
 pesel(X)
 
-\dontrun{
-library(MetabolAnalyze)
-data(UrineSpectra)
-pesel(UrineSpectra[[1]], method = "heterogenous")
-}
 }
