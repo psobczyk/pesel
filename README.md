@@ -1,4 +1,6 @@
 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/pesel)](http://cran.r-project.org/package=pesel)
+[![Downloads](http://cranlogs.r-pkg.org/badges/pesel)](http://cran.rstudio.com/package=pesel)
 [![Build Status](https://api.travis-ci.org/psobczyk/pesel.png)](https://travis-ci.org/psobczyk/pesel)
 
 [<img src="http://www.ideal.rwth-aachen.de/wp-content/uploads/2013/08/banner1.png">](http://www.ideal.rwth-aachen.de/)
