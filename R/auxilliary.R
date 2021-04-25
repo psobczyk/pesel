@@ -23,7 +23,7 @@ pesel_homogeneous <- function(X, minK, maxK){
     v <- sum(lambda[(k+1):d])/(d-k)
 
     t0 <- -N*d/2*log(2*pi)
-    t1 <- -N*k/2*log(mean(lambda[1:k]))
+    t1 <- -N*k/2*log(mean(head(lambda, k)))
     t2 <- -N*(d-k)/2*log(v)
     t3 <- -N*d/2
     pen <- -(m+d+1+1)/2*log(N)
@@ -57,7 +57,7 @@ pesel_heterogeneous <- function(X, minK, maxK){
     v <- sum(lambda[(k+1):d])/(d-k)
 
     t0 <- -N*d/2*log(2*pi)
-    t1 <- -N/2*sum(log(lambda[1:k]))
+    t1 <- -N/2*sum(log(head(lambda, k)))
     t2 <- -N*(d-k)/2*log(v)
     t3 <- -N*d/2
     pen <- -(m+d+k+1)/2*log(N)
