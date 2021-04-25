@@ -51,7 +51,6 @@ pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
   p = ncol(X)
   npc.max = min(npc.max, min(n,p)-1)
   npc.min = max(npc.min, 0)
-
   if(is.null(prior)){
     prior = rep(1/(npc.max - npc.min + 1), npc.max - npc.min + 1)
   } else if(length(prior) != npc.max - npc.min + 1){
@@ -64,14 +63,13 @@ pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
 
   method = match.arg(method)
 
-  if(class(X) == "data.frame"){
+  if("data.frame" %in% class(X)){
     X = as.matrix(X)
   }
 
   if(sum(sapply(X, is.numeric)) < p){
     stop("All the variables have to be numeric")
   }
-
   missing = which(is.na(X))
   if(length(missing) !=  0){
     stop("There are missing values")
