@@ -79,7 +79,7 @@ pesel <- function(X, npc.min = 0, npc.max = 10, prior = NULL, scale = TRUE,
   if(is.null(asymptotics)){
     vals = if(p > n) {
       if(scale[1] == TRUE){
-        X = scale(t(X))
+        X = t(scale(X))
       } else{
         X = t(X)
       }
@@ -89,7 +89,7 @@ pesel <- function(X, npc.min = 0, npc.max = 10, prior = NULL, scale = TRUE,
              "homogenous" = pesel_homogeneous(X, npc.min, npc.max))
     } else {
       if(scale[1] == TRUE){
-        X <- as.matrix(scale(X))
+        X <- t(as.matrix(scale(t(X))))
       }
       switch(method,
              "heterogenous" = pesel_heterogeneous(X, npc.min, npc.max),
@@ -97,7 +97,7 @@ pesel <- function(X, npc.min = 0, npc.max = 10, prior = NULL, scale = TRUE,
     }
   } else if(asymptotics == "p") {
     if(scale[1] == TRUE){
-      X = scale(t(X))
+      X = t(scale(X))
     } else{
       X = t(X)
     }
@@ -107,7 +107,7 @@ pesel <- function(X, npc.min = 0, npc.max = 10, prior = NULL, scale = TRUE,
                   "homogenous" = pesel_homogeneous(X, npc.min, npc.max))
   } else if(asymptotics == "n") {
     if(scale[1] == TRUE){
-      X <- as.matrix(scale(X))
+      X <- t(as.matrix(scale(t(X))))
     }
     vals = switch(method,
                   "heterogenous" = pesel_heterogeneous(X, npc.min, npc.max),
