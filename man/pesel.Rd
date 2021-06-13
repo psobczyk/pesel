@@ -5,8 +5,15 @@
 \title{Automatic estimation of number of principal components in PCA
 with PEnalized SEmi-integrated Likelihood (PESEL)}
 \usage{
-pesel(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
-  method = c("heterogenous", "homogenous"), asymptotics = NULL)
+pesel(
+  X,
+  npc.min = 0,
+  npc.max = 10,
+  prior = NULL,
+  scale = TRUE,
+  method = c("heterogenous", "homogenous"),
+  asymptotics = NULL
+)
 }
 \arguments{
 \item{X}{a data frame or a matrix contatining only continuous variables}
