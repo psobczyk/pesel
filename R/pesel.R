@@ -43,7 +43,7 @@
 #' X <- SIGNAL + replicate(numb.vars, sigma * rnorm(n))
 #' pesel(X)
 #'
-pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
+pesel <- function(X, npc.min = 0, npc.max = 10, prior = NULL, scale = TRUE,
                       method = c("heterogenous", "homogenous"), asymptotics = NULL){
   # preprocessing on X
   # number of components must be smaller than dimensions of X
@@ -75,32 +75,46 @@ pesel <- function(X, npc.min = 1, npc.max = 10, prior = NULL, scale = TRUE,
     stop("There are missing values")
   }
 
-  if(scale)
-    X = scale(X)
-
   vals = numeric(length(prior))
   if(is.null(asymptotics)){
     vals = if(p > n) {
+      if(scale[1] == TRUE){
+        X = t(scale(X))
+      } else{
+        X = t(X)
+      }
+      X = as.matrix(X)
       switch(method,
              "heterogenous" = pesel_heterogeneous(X, npc.min, npc.max),
              "homogenous" = pesel_homogeneous(X, npc.min, npc.max))
     } else {
+      if(scale[1] == TRUE){
+        X <- t(as.matrix(scale(t(X))))
+      }
       switch(method,
-             "heterogenous" = pesel_heterogeneous(t(X), npc.min, npc.max),
-             "homogenous" = pesel_homogeneous(t(X), npc.min, npc.max))
+             "heterogenous" = pesel_heterogeneous(X, npc.min, npc.max),
+             "homogenous" = pesel_homogeneous(X, npc.min, npc.max))
     }
   } else if(asymptotics == "p") {
+    if(scale[1] == TRUE){
+      X = t(scale(X))
+    } else{
+      X = t(X)
+    }
+    X <- as.matrix(X)
     vals = switch(method,
                   "heterogenous" = pesel_heterogeneous(X, npc.min, npc.max),
                   "homogenous" = pesel_homogeneous(X, npc.min, npc.max))
   } else if(asymptotics == "n") {
+    if(scale[1] == TRUE){
+      X <- t(as.matrix(scale(t(X))))
+    }
     vals = switch(method,
-                  "heterogenous" = pesel_heterogeneous(t(X), npc.min, npc.max),
-                  "homogenous" = pesel_homogeneous(t(X), npc.min, npc.max))
+                  "heterogenous" = pesel_heterogeneous(X, npc.min, npc.max),
+                  "homogenous" = pesel_homogeneous(X, npc.min, npc.max))
   } else {
     stop("asymptotics must be either NULL, 'n' or 'p'")
   }
-
   posterior = vals + log(prior)
   posterior = posterior - max(posterior) + 20
   posterior = exp(posterior)/sum(exp(posterior))

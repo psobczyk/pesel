@@ -9,7 +9,7 @@ Automatic estimation of number of principal components in PCA
 with PEnalized SEmi-integrated Likelihood (PESEL).
 }
 \details{
-Version: 0.7.2
+Version: 0.7.4
 }
 \examples{
 # EXAMPLE 1 - noise
