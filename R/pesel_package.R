@@ -3,11 +3,12 @@
 #' @description Automatic estimation of number of principal components in PCA
 #' with PEnalized SEmi-integrated Likelihood (PESEL).
 #'
-#' @details Version: 0.7.4
+#' @details Version: 0.7.5
 #' @docType package
 #' @name pesel-package
 #' @importFrom stats cov
 #' @importFrom graphics plot points
+#' @importFrom utils head
 #' @author{ Piotr Sobczyk,
 #'          Julie Josse,
 #'          Malgorzata Bogdan
@@ -15,7 +16,7 @@
 #' Maintainer: Piotr Sobczyk \email{pj.sobczyk@@gmail.com}
 #' }
 #' @references Piotr Sobczyk, Malgorzata Bogdan, Julie Josse
-#' \emph{Bayesian dimensionality reduction with PCA using penalized semi-integrated likelihood},
+#' "Bayesian dimensionality reduction with PCA using penalized semi-integrated likelihood",
 #' Journal of Computational and Graphical Statistics 2017
 #'
 #' @examples

@@ -11,6 +11,9 @@
 
 \item{...}{Further arguments to be passed to or from other methods. They are ignored in this function.}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Print pesel.result class object
 }
