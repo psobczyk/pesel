@@ -8,6 +8,7 @@
 #' @name pesel-package
 #' @importFrom stats cov
 #' @importFrom graphics plot points
+#' @importFrom utils head
 #' @author{ Piotr Sobczyk,
 #'          Julie Josse,
 #'          Malgorzata Bogdan

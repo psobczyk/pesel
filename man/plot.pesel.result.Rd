@@ -14,6 +14,9 @@ otherwise values of PeSeL criterion are plotted}
 
 \item{...}{Further arguments to be passed to or from other methods. They are ignored in this function.}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Plot pesel.result class object
 }

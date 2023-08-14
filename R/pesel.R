@@ -137,6 +137,7 @@ pesel <- function(X, npc.min = 0, npc.max = 10, prior = NULL, scale = TRUE,
 #' @param posterior a boolean, if TRUE (default value) then posterior probablities are plotted
 #' otherwise values of PeSeL criterion are plotted
 #' @param ... Further arguments to be passed to or from other methods. They are ignored in this function.
+#' @return No return value, called for side effects
 #' @export
 #' @keywords internal
   plot.pesel.result <- function(x, posterior = TRUE, ...){
@@ -158,6 +159,7 @@ pesel <- function(X, npc.min = 0, npc.max = 10, prior = NULL, scale = TRUE,
 #'
 #' @param x pesel.result class object
 #' @param ... Further arguments to be passed to or from other methods. They are ignored in this function.
+#' @return No return value, called for side effects
 #' @export
 #' @keywords internal
 print.pesel.result <- function(x,...){
