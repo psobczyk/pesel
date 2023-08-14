@@ -1,8 +1,8 @@
 Package: pesel
 Type: Package
 Title: Automatic Estimation of Number of Principal Components in PCA
-Version: 0.7.4
-Date: 2021-06-13
+Version: 0.7.5
+Date: 2023-08-14
 Author: Piotr Sobczyk, Julie Josse, Malgorzata Bogdan
 Maintainer: Piotr Sobczyk <pj.sobczyk@gmail.com>
 Description: Automatic estimation of number of principal components in PCA
