@@ -9,7 +9,7 @@ Automatic estimation of number of principal components in PCA
 with PEnalized SEmi-integrated Likelihood (PESEL).
 }
 \details{
-Version: 0.7.4
+Version: 0.7.5
 }
 \examples{
 # EXAMPLE 1 - noise
@@ -31,7 +31,7 @@ pesel(X)
 }
 \references{
 Piotr Sobczyk, Malgorzata Bogdan, Julie Josse
-\emph{Bayesian dimensionality reduction with PCA using penalized semi-integrated likelihood},
+"Bayesian dimensionality reduction with PCA using penalized semi-integrated likelihood",
 Journal of Computational and Graphical Statistics 2017
 }
 \author{

@@ -18,5 +18,4 @@ Depends:
 Imports:
     stats,
     graphics
-LazyData: FALSE
 RoxygenNote: 7.2.3
